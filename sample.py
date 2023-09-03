@@ -3,21 +3,20 @@ import random
 
 # Story templates with placeholders
 templates = [
-    "{character} was feeling {emotion} in the {setting}. But after {action}, {character} felt so much better and learned that {message}.",
-    "In the magical land of {setting}, {character} discovered a {object}. By {action}, they realized that {message}.",
-    "{character} always wanted to {action}. One day, in the {setting}, they finally did! And they understood that {message}."
+    "{character} was in a grand castle. They felt {emotion}. As they wandered the halls, they stumbled upon a {object}. Curious, {character} decided to {action}. Through this adventure, they met many friends and faced challenges. In the end, {character} realized that {message}. It was a day they'd never forget in the castle.",
+    "In the heart of a majestic castle, {character} discovered a {object}. This wasn't any ordinary item; it had powers. Unsure of what to do, {character} decided to {action}. Along the way, they learned many lessons. The most important of all was that {message}. The castle always had its mysteries.",
+    "The castle's towers touched the sky. Inside, {character} found a {object}. This discovery led them to {action}. The journey was filled with surprises. But with courage and heart, {character} understood that {message}. The castle's walls echoed with their laughter."
 ]
 
 # Possible values for the placeholders
 characters = ["Lily the Rabbit", "Tommy the Turtle", "Finn the Fox"]
-emotions = ["sad", "lonely", "worried"]
-settings = ["meadow", "forest", "beach"]
-actions = ["meeting a new friend", "helping someone in need", "finding a hidden treasure"]
-objects = ["shiny stone", "old book", "mysterious key"]
+emotions = ["overwhelmed", "intrigued", "anxious"]
+objects = ["golden goblet", "enchanted mirror", "mystical pendant"]
+actions = ["seek its origin", "unlock its secrets", "find its rightful owner"]
 messages = [
-    "it's always brighter after the storm",
-    "kindness always comes back",
-    "friendship is the real treasure"
+    "true value isn't in things, but in memories made",
+    "every challenge is an opportunity in disguise",
+    "the heart's courage is the most potent magic of all"
 ]
 
 def generate_story():
@@ -25,15 +24,14 @@ def generate_story():
     story = template.format(
         character=random.choice(characters),
         emotion=random.choice(emotions),
-        setting=random.choice(settings),
-        action=random.choice(actions),
         object=random.choice(objects),
+        action=random.choice(actions),
         message=random.choice(messages)
     )
     return story
 
 # Streamlit interface
-st.title("Kids Story Generator")
+st.title("Castle Story Generator for Kids")
 if st.button("Generate a Story"):
     story = generate_story()
     st.write(story)
