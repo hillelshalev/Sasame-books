@@ -9,7 +9,6 @@ templates = [
 ]
 
 # Possible values for the placeholders
-characters = ["Lily the Rabbit", "Tommy the Turtle", "Finn the Fox"]
 emotions = ["overwhelmed", "intrigued", "anxious"]
 objects = ["golden goblet", "enchanted mirror", "mystical pendant"]
 actions = ["seek its origin", "unlock its secrets", "find its rightful owner"]
@@ -19,10 +18,10 @@ messages = [
     "the heart's courage is the most potent magic of all"
 ]
 
-def generate_story():
+def generate_story(character_name):
     template = random.choice(templates)
     story = template.format(
-        character=random.choice(characters),
+        character=character_name,
         emotion=random.choice(emotions),
         object=random.choice(objects),
         action=random.choice(actions),
@@ -32,6 +31,8 @@ def generate_story():
 
 # Streamlit interface
 st.title("Castle Story Generator for Kids")
+character_name = st.text_input("Enter the character's name:", "Lily")
+
 if st.button("Generate a Story"):
-    story = generate_story()
+    story = generate_story(character_name)
     st.write(story)
