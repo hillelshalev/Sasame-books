@@ -1,6 +1,5 @@
 import streamlit as st
 import random
-import os
 
 # Song templates with placeholders
 templates = [
@@ -50,3 +49,14 @@ def generate_song(character_name, place, animal, message):
         message=message
     )
     return song
+
+# Streamlit interface
+st.title("Adventure Song Generator for Kids")
+character_name = st.text_input("Enter the character's name:", "Lily")
+place = st.text_input("Enter the place for the adventure:", "Mystical Meadow")
+animal = st.text_input("Enter the type of animal the character has:", "Faithful Dog")
+message = st.selectbox("Choose a positive message about healthy eating:", healthy_messages)
+
+if st.button("Generate a Song"):
+    song = generate_song(character_name, place, animal, message)
+    st.write(song)
