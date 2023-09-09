@@ -1,62 +1,50 @@
 import streamlit as st
 import random
 
-# Song templates with placeholders
+# Rhyming story templates with placeholders
 templates = [
-    "{character} in the {place}, feeling {emotion},\nFound a {object}, its shine in slow motion.\nWith their {animal}, so loyal and true,\nThey decided to {action}, as brave heroes do.\nThrough valleys and mountains, they journeyed so far,\nLearning that {message}, is the best by par.\nIn the end, they sang, with voices so grand,\nOf adventures and tales, throughout the land.",
+    "{hero} was in the {place}, feeling quite {emotion},\nWith their {animal}, they set things in motion.\nThey found a {object}, shining so bright,\nDecided to {action}, with all their might.\nThrough challenges and adventures, they did fare,\nAnd in the end, they learned about {message} with care.",
     
-    "In the heart of {place}, under the sun's rays,\n{character} and their {animal}, lost in a daze.\nA mysterious {object}, gleaming and bright,\nCalled them to {action}, with all their might.\nThrough challenges faced, they found {message} so clear,\nTheir song of health and joy, everyone wanted to hear.\nWith steps so light, and hearts so free,\nThey celebrated the magic, of being healthy.",
+    "In the {place}, under the sun's glow,\n{hero} and their {animal}, put up a great show.\nA mysterious {object}, caught their keen eye,\nThey chose to {action}, reaching for the sky.\nWith every step, they grew more aware,\nThat the true treasure was the lesson on {message} they'd share.",
     
-    "{place} echoed with a magical song,\nWhere {character} and their {animal} did belong.\nDiscovering a {object}, ancient and rare,\nThey chose to {action}, with courage to spare.\nEvery step taught them, {message} so profound,\nTheir song of bravery and health, spread all around.\nWith tales of fruits, veggies, and water so clear,\nThey sang of the secrets, everyone should hear."
+    "{place} held a secret, waiting to be found,\nWhere {hero} and their {animal} played around.\nDiscovering a {object}, they felt a rare thrill,\nAnd decided to {action}, testing their skill.\nTheir journey taught them, with every square,\nThe importance of {message}, beyond compare."
 ]
 
 # Possible values for the placeholders
-emotions = ["overwhelmed", "intrigued", "anxious"]
-objects = ["golden goblet", "enchanted mirror", "mystical pendant"]
-actions = ["seek its origin", "unlock its secrets", "find its rightful owner"]
-healthy_messages = [
-    "eating fruits and veggies makes us strong",
-    "a balanced meal is where we belong",
-    "drink water to stay refreshed and bright",
-    "healthy foods give us energy and might",
-    "eating well is the key to feel great",
-    "choose whole foods, it's never too late",
-    "a colorful plate is a joy to eat",
-    "good nutrition is truly a treat",
-    "healthy habits start with every bite",
-    "eat well, sleep well, and you'll feel light",
-    "fruits and veggies are nature's candy",
-    "eating whole grains makes us feel dandy",
-    "a healthy snack is a powerful tool",
-    "nutrition is the best kind of fuel",
-    "eat a rainbow, feel the glow",
-    "with good food, our health will show",
-    "healthy choices make us feel proud",
-    "shout your love for veggies loud",
-    "good nutrition is a lifelong quest",
-    "eating well truly is the best"
-]
+places = ["Mystical Meadow", "Enchanted Forest", "Whimsical Waterfall", "Serene Seashore", "Golden Grove"]
+emotions = ["curious", "excited", "determined"]
+objects = ["ancient map", "mysterious key", "enchanted stone", "old scroll", "magical pendant"]
+actions = ["follow its path", "unlock its mystery", "decipher its runes"]
+animals = ["playful cat", "loyal dog", "chirpy parrot", "gentle rabbit", "smart hamster"]
+messages = {
+    "healthy eating": "the joy of eating greens and fruits",
+    "friendship": "the bond of true friendship",
+    "exercise": "keeping active and fit",
+    "courage to dare": "the courage to explore and dare",
+    "respecting your elderly": "respecting and valuing the elderly"
+}
+heroes = ["hero", "heroine"]
 
-def generate_song(character_name, place, animal, message):
+def generate_story(hero, place, animal, message_key):
     template = random.choice(templates)
-    song = template.format(
-        character=character_name,
+    story = template.format(
+        hero=hero,
         place=place,
         emotion=random.choice(emotions),
         object=random.choice(objects),
         action=random.choice(actions),
         animal=animal,
-        message=message
+        message=messages[message_key]
     )
-    return song
+    return story
 
 # Streamlit interface
-st.title("Adventure Song Generator for Kids")
-character_name = st.text_input("Enter the character's name:", "Lily")
-place = st.text_input("Enter the place for the adventure:", "Mystical Meadow")
-animal = st.text_input("Enter the type of animal the character has:", "Faithful Dog")
-message = st.selectbox("Choose a positive message about healthy eating:", healthy_messages)
+st.title("Rhyming Adventure Story Generator for Kids")
+hero = st.selectbox("Choose the protagonist:", heroes)
+place = st.selectbox("Select a place for the adventure:", places)
+animal = st.selectbox("Choose the type of animal the protagonist has:", animals)
+message_key = st.selectbox("Choose the core message of the story:", list(messages.keys()))
 
-if st.button("Generate a Song"):
-    song = generate_song(character_name, place, animal, message)
-    st.write(song)
+if st.button("Generate a Story"):
+    story = generate_story(hero, place, animal, message_key)
+    st.write(story)
