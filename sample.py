@@ -1,46 +1,46 @@
 import streamlit as st
 import random
 
-# Adjusted rhyming story templates with placeholders
+# Rhyming story templates with placeholders
 templates = [
-    "{name} was in the {place}, feeling quite {emotion}.\nWith their {animal}, adventure was set in motion.\nThey discovered a {object}, gleaming so bright.\nChose to {action}, with courage and might.\nJourneying far, facing challenges rare.\nThey learned about {message}, with wisdom to share.",
+    "In the heart of {place}, where wonders never cease,\nLived {name} and their {animal}, in perfect peace.\nOne day, a {object} appeared, mysterious and grand,\nPrompting {name} and their parent to explore the land.\n\nThey faced many challenges, some big, some small,\nBut with courage and wit, they overcame them all.\nWith every twist and turn, their bond did grow,\nLearning lessons about {message}, more than they'd ever know.\n\nReturning home, with stories to tell,\n{name}, their {animal}, and parent, in their hearts, the lessons did dwell.",
     
-    "In the heart of {place}, as the sun began to glow,\n{name} and their {animal}, prepared for the show.\nA {object} they found, with mysteries to pry.\nThey decided to {action}, aiming for the sky.\nThrough twists and turns, their spirit did flare.\nWith the lesson of {message}, for all to be aware.",
+    "{name}, in {place}, started their day with glee,\nWith their {animal} and parent, as happy as can be.\nBut a {object} they found, set them on a quest,\nTo discover its secrets, they'd give their best.\n\nJourneying far, facing challenges untold,\nThe trio's determination was a sight to behold.\nThrough every adventure, their spirits never did sway,\nFor they learned about {message}, in a profound way.\n\nAs the stars shone bright, signaling the journey's end,\n{name} realized the value of family and friend.",
     
-    "{place} whispered tales, of treasures profound.\nWhere {name} and their {animal} were destiny-bound.\nAn {object} they spotted, ancient and still.\nWith determination, they chose to {action} with will.\nWith every challenge, their bond did prepare.\nThe essence of {message}, became their core prayer."
+    "In the serene surroundings of {place}, under the blue sky,\n{name} and their {animal} heard a mysterious cry.\nWith their parent by their side, they decided to explore,\nFinding a {object}, they'd never seen before.\n\nThe journey was long, with many a twist,\nBut with love and perseverance, nothing was amiss.\nTogether, they discovered the magic so rare,\nAnd the importance of {message}, beyond compare.\n\nReturning to {place}, their hearts full of glee,\n{name}, their {animal}, and parent, forever a story to be."
 ]
 
 # Possible values for the placeholders
 places = ["Mystical Meadow", "Enchanted Forest", "Whimsical Waterfall", "Serene Seashore", "Golden Grove"]
-emotions = ["curious", "excited", "determined"]
 objects = ["ancient map", "mysterious key", "enchanted stone", "old scroll", "magical pendant"]
-actions = ["follow its path", "unlock its mystery", "decipher its runes"]
 animals = ["playful cat", "loyal dog", "chirpy parrot", "gentle rabbit", "smart hamster"]
 messages = {
-    "healthy eating": "the joy of eating greens and fruits",
+    "healthy eating": "eating healthy and staying fit",
     "friendship": "the bond of true friendship",
-    "exercise": "keeping active and fit",
-    "courage to dare": "the courage to explore and dare",
-    "respecting your elderly": "respecting and valuing the elderly"
+    "exercise": "the joys of staying active",
+    "courage to dare": "having the courage to dare and dream",
+    "respecting your elderly": "the wisdom of respecting the elderly"
 }
 heroes = ["hero", "heroine"]
 
 def generate_story(name, hero, place, animal, message_key):
-    template = random.choice(templates)
-    story = template.format(
-        name=name,
-        hero=hero,
-        place=place,
-        emotion=random.choice(emotions),
-        object=random.choice(objects),
-        action=random.choice(actions),
-        animal=animal,
-        message=messages[message_key]
-    )
+    while True:  # Keep generating until the story is within the desired word count
+        template = random.choice(templates)
+        story = template.format(
+            name=name,
+            hero=hero,
+            place=place,
+            object=random.choice(objects),
+            animal=animal,
+            message=messages[message_key]
+        )
+        word_count = len(story.split())
+        if 450 <= word_count <= 550:
+            break
     return story
 
 # Streamlit interface
-st.title("Rhyming Adventure Story Generator for Kids")
+st.title("Adventure Story Generator for Kids")
 name = st.text_input("Enter the name of the protagonist:", "Alex")
 hero = st.selectbox("Choose the protagonist's role:", heroes)
 place = st.selectbox("Select a place for the adventure:", places)
@@ -52,4 +52,3 @@ if st.button("Generate a Story"):
     # Bold the name of the hero
     story = story.replace(name, f"**{name}**")
     st.markdown(story)
-
